@@ -6,6 +6,5 @@ def main():
     obj = AuthController()
     obj.initialize_interaction()
 
-
 if __name__ == "__main__":
     main()

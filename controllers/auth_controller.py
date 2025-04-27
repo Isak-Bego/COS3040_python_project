@@ -1,4 +1,5 @@
 from controllers.base_controller import BaseController
+from controllers.manager_controller import ManagerController
 from models.managers_model import ManagerModel
 from models.employee_model import EmployeeModel
 from time import sleep
@@ -27,11 +28,16 @@ class AuthController(BaseController):
 
             match choice:
                 case 1:
-                    self.authenticate_manager()
+                    result = self.authenticate_manager()
+                    if result:
+                        manager_controller = ManagerController(result)
+                        manager_controller.initialize_interaction()
                 case 2:
                     self.authenticate_cook()
+                    # After the cooks is authenticated we pass the control to the respective controller
                 case 3:
                     self.authenticate_server()
+                    # After the server is authenticated we pass the control to the respective controller
                 case 4:
                     print("Exiting...")
                 case _:
@@ -57,7 +63,7 @@ class AuthController(BaseController):
                     if password == "q": break
                     # Check if the password is correct
                     if password == user_credentials["password"]:
-                        return True
+                        return user_credentials
                     else:
                         print("Invalid password. Please try again.")
                         sleep(1)
@@ -65,7 +71,7 @@ class AuthController(BaseController):
                 print("Invalid username. Please try again.")
                 sleep(1)
 
-        return False
+        return None
 
     def authenticate_with_passkey(self, role):
 
@@ -86,12 +92,12 @@ class AuthController(BaseController):
             user_credentials = self._employee_model.read(passkey=passkey)
             # Verify if the user exists in the database and it matches its role
             if user_credentials and user_credentials["role"] == role:
-                return True
+                return user_credentials
             else:
                 print("Invalid passkey. Please try again.")
                 sleep(1)
 
-        return False
+        return None
 
     def authenticate_cook(self):
         self.authenticate_with_passkey("cook")
