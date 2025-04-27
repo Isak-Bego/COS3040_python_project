@@ -23,12 +23,12 @@ LOGIN_HEADER_TEMPLATE = \
 
 MANAGER_LOGIN_CREDENTIAL_TEMPLATE = \
 """
-Enter {credential}: 
+Enter {credential}, or q to go back: 
 """
 
 PASSCODE_LOGIN_VIEW = \
 """
-Enter passcode:
+Enter passcode, or q to go back:
 """
 
 class AuthView(BaseView):

@@ -1,4 +1,7 @@
 from controllers.base_controller import BaseController
+from models.managers_model import ManagerModel
+from models.employee_model import EmployeeModel
+from time import sleep
 from views.auth_view import AuthView
 
 
@@ -6,6 +9,8 @@ class AuthController(BaseController):
 
     def __init__(self):
         self._auth_view = AuthView()
+        self._manager_model = ManagerModel()
+        self._employee_model = EmployeeModel()
 
     def initialize_interaction(self):
         choice = -1
@@ -34,11 +39,62 @@ class AuthController(BaseController):
 
 
     def authenticate_manager(self):
-        self._auth_view.print_manager_login_view("username")
-        self._auth_view.print_manager_login_view("password")
+        username = ""
+        while username != "q":
+            self._auth_view.print_manager_login_view("username")
+            # Get the user's input
+            username = input()
+            if username == "q": break
+            # Fetch the data from the database
+            user_credentials = self._manager_model.read(username=username)
+            # Check if the user exists in the database
+            if user_credentials:
+                password = ""
+                while password != "q":
+                    self._auth_view.print_manager_login_view("password")
+                    # Get the user's password
+                    password = input()
+                    if password == "q": break
+                    # Check if the password is correct
+                    if password == user_credentials["password"]:
+                        return True
+                    else:
+                        print("Invalid password. Please try again.")
+                        sleep(1)
+            else:
+                print("Invalid username. Please try again.")
+                sleep(1)
+
+        return False
+
+    def authenticate_with_passkey(self, role):
+
+        passkey = ""
+
+        while passkey != "q":
+
+            if role == "cook":
+                self._auth_view.print_cook_login_view()
+            else:
+                self._auth_view.print_server_login_view()
+
+            # Get the user's passkey
+            passkey = input()
+
+            if passkey == "q": break
+            # Fetch the data from the database
+            user_credentials = self._employee_model.read(passkey=passkey)
+            # Verify if the user exists in the database and it matches its role
+            if user_credentials and user_credentials["role"] == role:
+                return True
+            else:
+                print("Invalid passkey. Please try again.")
+                sleep(1)
+
+        return False
 
     def authenticate_cook(self):
-        self._auth_view.print_cook_login_view()
+        self.authenticate_with_passkey("cook")
 
     def authenticate_server(self):
-        self._auth_view.print_server_login_view()
+        self.authenticate_with_passkey("server")

@@ -2,19 +2,20 @@ import csv
 
 from models.base_model import BaseModel
 
+MANAGERS_FILE_PATH = "data/managers.csv"
 
 class ManagerModel(BaseModel):
 
     def create(self, username, password):
         # Create a new manager entry in the CSV file.
-        with open('managers.csv', mode='a', newline='') as file:
+        with open(MANAGERS_FILE_PATH, mode='a', newline='') as file:
             writer = csv.writer(file)
             writer.writerow([username, password])
         print(f"Manager {username} created with password: {password}")
 
     def read(self, username):
         # Read manager's credentials from the CSV file.
-        with open('managers.csv', mode='r') as file:
+        with open(MANAGERS_FILE_PATH, mode='r') as file:
             reader = csv.reader(file)
             for row in reader:
                 if row[0] == username:
@@ -26,10 +27,10 @@ class ManagerModel(BaseModel):
     def update(self, username, new_username=None, new_password=None):
         # Update manager's credentials in the CSV file.
         updated = False
-        with open('managers.csv', mode='r') as file:
+        with open(MANAGERS_FILE_PATH, mode='r') as file:
             rows = list(csv.reader(file))
 
-        with open('managers.csv', mode='w', newline='') as file:
+        with open(MANAGERS_FILE_PATH, mode='w', newline='') as file:
             writer = csv.writer(file)
             for row in rows:
                 if row[0] == username:
@@ -48,10 +49,10 @@ class ManagerModel(BaseModel):
     def delete(self, username):
         # Delete manager's credentials from the CSV file.
         deleted = False
-        with open('managers.csv', mode='r') as file:
+        with open(MANAGERS_FILE_PATH, mode='r') as file:
             rows = list(csv.reader(file))
 
-        with open('managers.csv', mode='w', newline='') as file:
+        with open(MANAGERS_FILE_PATH, mode='w', newline='') as file:
             writer = csv.writer(file)
             for row in rows:
                 if row[0] != username:
