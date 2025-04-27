@@ -2,6 +2,10 @@ from utils.clear_console import clear_console
 from views.base_view import BaseView
 from views.manager_view import MENU_ITEM_TEMPLATE
 
+"""
+This module is responsible for constructing and managing the order view.
+"""
+
 ORDER_ITEM_TEMPLATE = \
 """
 -----------------------------

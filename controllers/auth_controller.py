@@ -7,6 +7,12 @@ from models.employee_model import EmployeeModel
 from time import sleep
 from views.auth_view import AuthView
 
+"""
+Here is located all the business logic for the application authentication precedure. There are 2 types of authentication. 
+The manager authentication which requires a username and password and the cook/server authentication which requires 
+only a passcode for fast authentication. After the parties are successfully authenticated, they can continue using the 
+core functionality of th app.
+"""
 
 class AuthController(BaseController):
 

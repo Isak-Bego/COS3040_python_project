@@ -1,6 +1,9 @@
 from controllers.auth_controller import AuthController
-from views.auth_view import AuthView
 
+"""
+This is the main entry point of the application. It creates an authenticationController instance and it calls the 
+initialize_interaction() method.
+"""
 
 def main():
     obj = AuthController()

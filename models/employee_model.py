@@ -3,6 +3,10 @@ import os
 
 from models.base_model import BaseModel
 
+"""
+This module contains the CRUD business logic for the employees table. 
+"""
+
 EMPLOYEES_FILE_PATH = "data/employees.csv"
 
 class EmployeeModel(BaseModel):

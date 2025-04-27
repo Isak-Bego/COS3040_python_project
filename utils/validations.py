@@ -1,5 +1,9 @@
 import re
 
+"""
+This module contains validator functions using regular expressions.
+"""
+
 def get_valid_input(prompt, validator_func):
     """Helper function to get validated input."""
     user_input = input(prompt)

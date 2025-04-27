@@ -1,6 +1,10 @@
 from utils.clear_console import clear_console
 from views.order_view import OrderView
 
+"""
+This module is responsible for constructing and managing the cook view.
+"""
+
 COOK_MAIN_SCREEN = \
 """
 Hello {name}!

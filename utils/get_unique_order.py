@@ -1,4 +1,5 @@
-from time import sleep
+
+"""This is a utility function for getting the unique ids of all the order entries"""
 
 def get_unique_orders(order_items):
     """Returns a list of unique order_ids without using set."""

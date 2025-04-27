@@ -1,7 +1,10 @@
 from controllers.base_controller import BaseController
 from models.order_items_model import OrderItemModel
 from views.cook_view import CookView
-from time import sleep
+
+"""
+Here is contained the business logic for the cook functionality.
+"""
 
 
 class CookController(BaseController):

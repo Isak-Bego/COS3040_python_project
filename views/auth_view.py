@@ -1,6 +1,10 @@
 from utils.clear_console import clear_console
 from views.base_view import BaseView
 
+"""
+This module contains all the logic for constructing and displaying the authentication views
+"""
+
 MAIN_AUTH_TEMPLATE_STRING = \
 """
 Login as: 

@@ -1,6 +1,10 @@
 from utils.clear_console import clear_console
 from views.base_view import BaseView
 
+"""
+This module is responsible for constructing and managing the manager view.
+"""
+
 MAIN_MANAGER_TEMPLATE_SCREEN = \
 """
 Hello {name}!

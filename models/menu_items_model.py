@@ -4,6 +4,11 @@ from models.base_model import BaseModel
 
 MENU_ITEMS_FILE_PATH = "data/menu_items.csv"
 
+
+"""
+This module contains all the CRUD business logic for the Menu Item table
+"""
+
 class MenuItemModel(BaseModel):
 
     def create(self, name, category, price):

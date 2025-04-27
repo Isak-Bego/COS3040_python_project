@@ -9,6 +9,10 @@ from views.manager_view import ManagerView
 
 from views.order_view import OrderView
 
+"""
+This module contains the business logic for the manager functionality. More specifically, it contains all the instructions and 
+for managing employees.
+"""
 
 class ManagerController(BaseController):
 

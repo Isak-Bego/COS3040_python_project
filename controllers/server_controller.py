@@ -2,6 +2,9 @@ from controllers.order_controller import OrderController
 from models.order_items_model import OrderItemModel
 from views.server_view import ServerView
 
+"""
+This module contains all the business logic of the server functionality.
+"""
 
 class ServerController(OrderController):
     def __init__(self, server):

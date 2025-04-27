@@ -4,6 +4,9 @@ from models.order_items_model import OrderItemModel
 from utils.get_unique_order import get_unique_orders
 from views.order_view import OrderView
 
+"""
+Here is located the logic behind the order management.
+"""
 
 class OrderController(BaseController):
     def __init__(self):

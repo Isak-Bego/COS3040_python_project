@@ -4,6 +4,10 @@ from models.base_model import BaseModel
 
 MANAGERS_FILE_PATH = "data/managers.csv"
 
+"""
+This module contains the CRUD business logic for the managers table. 
+"""
+
 class ManagerModel(BaseModel):
 
     def create(self, username, password):

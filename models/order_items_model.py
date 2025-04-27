@@ -7,6 +7,9 @@ from models.base_model import BaseModel
 
 ORDER_ITEMS_FILE_PATH = "data/order_items.csv"
 
+"""
+This module contains all the CRUD business logic for the Order Items table.
+"""
 
 class OrderItemModel(BaseModel):
 
