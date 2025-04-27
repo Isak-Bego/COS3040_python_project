@@ -13,5 +13,5 @@ class BaseView(ABC):
         self.base_template_string = SYSTEM_HEADER
 
     @abstractmethod
-    def print_main_view(self):
+    def print_main_view(self, *args, **kwargs):
         pass

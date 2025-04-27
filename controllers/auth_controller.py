@@ -1,4 +1,5 @@
 from controllers.base_controller import BaseController
+from controllers.cook_controller import CookController
 from controllers.manager_controller import ManagerController
 from models.managers_model import ManagerModel
 from models.employee_model import EmployeeModel
@@ -33,8 +34,10 @@ class AuthController(BaseController):
                         manager_controller = ManagerController(result)
                         manager_controller.initialize_interaction()
                 case 2:
-                    self.authenticate_cook()
-                    # After the cooks is authenticated we pass the control to the respective controller
+                    result = self.authenticate_cook()
+                    if result:
+                        cook_controller = CookController(result)
+                        cook_controller.initialize_interaction()
                 case 3:
                     self.authenticate_server()
                     # After the server is authenticated we pass the control to the respective controller
@@ -100,7 +103,8 @@ class AuthController(BaseController):
         return None
 
     def authenticate_cook(self):
-        self.authenticate_with_passkey("cook")
+        result = self.authenticate_with_passkey("cook")
+        return result
 
     def authenticate_server(self):
         self.authenticate_with_passkey("server")

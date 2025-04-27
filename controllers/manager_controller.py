@@ -4,9 +4,10 @@ from models.menu_items_model import MenuItemModel
 from models.order_items_model import OrderItemModel
 from utils.get_unique_order import get_unique_orders
 from utils.validations import validate_name, validate_surname, validate_role, validate_passkey, get_valid_input, \
-    validate_category, validate_price, validate_integer
+    validate_category, validate_price
 from views.manager_view import ManagerView
-from time import sleep
+
+from views.order_view import OrderView
 
 
 class ManagerController(BaseController):
@@ -16,6 +17,7 @@ class ManagerController(BaseController):
         self._employee_model = EmployeeModel()
         self._menu_items_model = MenuItemModel()
         self._order_items_model = OrderItemModel()
+        self._order_view = OrderView()
 
     def initialize_interaction(self):
         choice = -1
@@ -208,7 +210,7 @@ class ManagerController(BaseController):
 
         while choice != 3:
             unique_orders = get_unique_orders(order_items)
-            self._manager_view.print_order_view(unique_orders)
+            self._order_view.print_main_view(unique_orders)
 
             try:
                 choice = int(input())
@@ -230,7 +232,7 @@ class ManagerController(BaseController):
 
     def create_new_order(self):
         menu_items = self._menu_items_model.read_all()
-        self._manager_view.print_new_order_view(menu_items)
+        self._order_view.print_new_order_view(menu_items)
 
         item_id = int(input("Enter item id: "))
         item_quantity = int(input("Enter item quantity: "))
@@ -242,7 +244,7 @@ class ManagerController(BaseController):
         order_items = self._order_items_model.read_all()
         order_id = input("Enter order ID: ")
 
-        self._manager_view.print_existing_order_view(order_id=order_id, menu_items=menu_items, order_items=order_items)
+        self._order_view.print_existing_order_view(order_id=order_id, menu_items=menu_items, order_items=order_items)
 
         choice = -1
 
