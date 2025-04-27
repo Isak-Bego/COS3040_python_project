@@ -17,5 +17,3 @@ class CookController(BaseController):
         choice = ""
         while choice != "q":
             choice = input("Press q to exit...")
-
-
