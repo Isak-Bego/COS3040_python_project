@@ -31,11 +31,11 @@ Passkey: {passkey}
 -----------------------------
 """
 
-EMPLOYEES_PAGE_MENU = \
+MANAGE_PAGE_MENU = \
 """
-1. Add Employee
-2. Edit Employee
-3. Remove Employee
+1. Add {item}
+2. Edit {item}
+3. Remove {item}
 
 4. Exit
 
@@ -50,6 +50,26 @@ EMPLOYEES_EDIT_MENU = \
 
 4. Exit
 Enter your choice (1 - 4): 
+"""
+
+MENU_ITEM_EDIT_MENU = \
+"""
+1. Edit Name
+2. Edit Category
+3. Edit Price
+
+4. Exit
+Enter your choice (1 - 4): 
+"""
+
+MENU_ITEM_TEMPLATE = \
+"""
+-----------------------------
+Id: {id}
+name: {name}
+category: {category}
+price: {price}
+-----------------------------
 """
 
 class ManagerView(BaseView):
@@ -68,9 +88,21 @@ class ManagerView(BaseView):
         for employee in employees:
             name, surname, role, unique_passkey = employee
             print(EMPLOYEE_CARD_TEMPLATE.format(name=name, surname=surname, role=role, passkey=unique_passkey))
-        print(EMPLOYEES_PAGE_MENU)
+        print(MANAGE_PAGE_MENU.format(item="Employee"))
 
-    def print_edit_view(self, employee):
+    def print_employee_edit_view(self, employee):
         clear_console()
         print(EMPLOYEE_CARD_TEMPLATE.format(name=employee["name"], surname=employee["surname"], role=employee["role"], passkey=employee["unique_passkey"]))
         print(EMPLOYEES_EDIT_MENU)
+
+    def print_menu_item_edit_view(self, menu_item):
+        clear_console()
+        print(MENU_ITEM_TEMPLATE.format(id=menu_item["id"], name=menu_item["name"], category=menu_item["category"], price=menu_item["price"]))
+        print(MENU_ITEM_EDIT_MENU)
+
+    def print_menu_items_view(self, menu_items):
+        clear_console()
+        for menu_item in menu_items:
+            id, name, category, price = menu_item
+            print(MENU_ITEM_TEMPLATE.format(id=id, name=name, category=category, price=price))
+        print(MANAGE_PAGE_MENU.format(item="Menu Item"))

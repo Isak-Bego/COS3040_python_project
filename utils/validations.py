@@ -40,3 +40,29 @@ def validate_passkey(passkey: str) -> bool:
         print("Error: The passkey should only 4 digits.")
         return False
     return True
+
+def validate_price(price: str) -> bool:
+    """Validates that the price is a positive number."""
+    pattern = r'^\d+(\.\d{1,2})?$'  # Matches positive numbers with up to two decimal places
+    if not bool(re.match(pattern, price)):
+        print("Error: The price should be a positive number, with up to two decimal places.")
+        return False
+    return True
+
+def validate_category(category: str) -> bool:
+    """Validates that the category is either 'cocktails', 'deserts', or 'main_course'."""
+    pattern = r'^(cocktails|deserts|main_course)$'
+    if not bool(re.match(pattern, category)):
+        print("Error: The category should be either 'cocktails', 'deserts', or 'main_course'.")
+        return False
+    return True
+
+def validate_integer(value: str) -> bool:
+    """Validates that the value is a valid integer."""
+    pattern = r'^[-+]?\d+$'  # Matches optional + or - followed by digits
+    if not bool(re.match(pattern, value)):
+        print("Error: The value should be a valid integer.")
+        return False
+    return True
+
+

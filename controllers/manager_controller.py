@@ -1,6 +1,8 @@
 from controllers.base_controller import BaseController
 from models.employee_model import EmployeeModel
-from utils.validations import validate_name, validate_surname, validate_role, validate_passkey, get_valid_input
+from models.menu_items_model import MenuItemModel
+from utils.validations import validate_name, validate_surname, validate_role, validate_passkey, get_valid_input, \
+    validate_category, validate_price, validate_integer
 from views.manager_view import ManagerView
 from time import sleep
 
@@ -10,6 +12,7 @@ class ManagerController(BaseController):
     def __init__(self, manager):
         self._manager_view = ManagerView(manager)
         self._employee_model = EmployeeModel()
+        self._menu_items_model = MenuItemModel()
 
     def initialize_interaction(self):
         choice = -1
@@ -30,7 +33,8 @@ class ManagerController(BaseController):
                     employees = self._employee_model.read_all()
                     self.manage_employees(employees)
                 case 2:
-                    print("2")
+                    menu_items = self._menu_items_model.read_all()
+                    self.manage_menu_items(menu_items)
                 case 3:
                     print("3")
                 case 4:
@@ -86,7 +90,7 @@ class ManagerController(BaseController):
             employee_passcode = get_valid_input("Enter employee passcode: ", validate_passkey)
             employee = self._employee_model.read(employee_passcode)
 
-        self._manager_view.print_edit_view(employee)
+        self._manager_view.print_employee_edit_view(employee)
         choice = int(input())
 
         match choice:
@@ -117,3 +121,79 @@ class ManagerController(BaseController):
 
         self._employee_model.delete(employee["unique_passkey"])
         return self._employee_model.read_all()
+
+    def manage_menu_items(self, menu_items):
+        choice = -1
+
+        while choice != 4:
+
+            self._manager_view.print_menu_items_view(menu_items)
+
+            try:
+                choice = int(input())
+
+            except ValueError:
+                print("Invalid input. Please enter a number.")
+                continue
+
+            match choice:
+                case 1:
+                    menu_items = self.add_menu_item()
+                case 2:
+                    menu_items = self.edit_menu_item()
+                case 3:
+                    menu_items = self.remove_menu_item()
+                case 4:
+                    print("Exiting...")
+                case _:
+                    print("Invalid choice. Please try again.")
+
+
+    def add_menu_item(self):
+        """Add a menu_item after validating input fields."""
+        item_name = get_valid_input("Enter menu item name: ", validate_name)
+        item_category = get_valid_input("Enter menu item category: ", validate_category)
+        item_price = get_valid_input("Enter menu item price: ", validate_price)
+
+        self._menu_items_model.create(item_name, item_category, item_price)
+        return self._menu_items_model.read_all()
+
+    def edit_menu_item(self):
+        menu_item_id = int(input("Enter menu item id: "))
+        menu_item = self._menu_items_model.read(menu_item_id)
+
+        while (not menu_item):
+            print("Invalid menu item ID. Please try again.")
+            menu_item_id = int(input("Enter menu item id: "))
+            menu_item = self._menu_items_model.read(menu_item_id)
+
+        self._manager_view.print_menu_item_edit_view(menu_item)
+        choice = int(input())
+
+        match choice:
+            case 1:
+                # Edit Name
+                new_name = get_valid_input("Enter new menu item name: ", validate_name)
+                self._menu_items_model.update(menu_item["id"], new_name=new_name)
+            case 2:
+                # Edit Category
+                new_category = get_valid_input("Enter new menu item category: ", validate_category)
+                self._menu_items_model.update(menu_item["category"], new_category=new_category)
+            case 3:
+                # Edit Price
+                new_price = get_valid_input("Enter new menu item price: ", validate_price)
+                self._menu_items_model.update(menu_item["price"], new_price=new_price)
+
+        return self._menu_items_model.read_all()
+
+    def remove_menu_item(self):
+        menu_item_id = int(input("Enter menu item id: "))
+        menu_item = self._menu_items_model.read(menu_item_id)
+
+        while (not menu_item):
+            print("Invalid menu item id. Please try again.")
+            menu_item_id = int(input("Enter menu item id: "))
+            menu_item = self._menu_items_model.read(menu_item_id)
+
+        self._menu_items_model.delete(menu_item["id"])
+        return self._menu_items_model.read_all()
