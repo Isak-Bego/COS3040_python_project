@@ -23,7 +23,7 @@ class ManagerController(BaseController):
     def initialize_interaction(self):
         choice = -1
 
-        while choice != 5:
+        while choice != 4:
 
             self._manager_view.print_main_view()
 
@@ -45,8 +45,6 @@ class ManagerController(BaseController):
                     order_items = self._order_items_model.read_all()
                     self._order_controller.initialize_interaction(order_items)
                 case 4:
-                    print("4")
-                case 5:
                     print("Exiting...")
                 case _:
                     print("Invalid choice. Please try again.")

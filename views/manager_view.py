@@ -8,11 +8,10 @@ Hello {name}!
 1. Manage Employees
 2. Manage Menu Items
 3. Manage Orders
-4. Check Stats
 
-5. Exit
+4. Exit
 
-Enter your choice (1 - 5): 
+Enter your choice (1 - 4): 
 """
 
 EMPLOYEES_PAGE_HEADER = \

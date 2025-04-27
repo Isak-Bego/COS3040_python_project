@@ -1,11 +1,2 @@
 order_id,item_id,quantity,preparation_status
-3cf9395e-30b6-48a3-8430-42ef4af57471,2,5,False
-727c2b66-be6f-4a5f-8543-88c7f0a7fc0b,2,3,False
-b9b81d36-e05d-49cf-823f-ca1a00ad507b,4,2,False
-caffa749-4923-4931-a4a1-20baef9ad6bf,3,6,False
-caffa749-4923-4931-a4a1-20baef9ad6bf,4,3,False
-caffa749-4923-4931-a4a1-20baef9ad6bf,2,4,False
-9fe791d1-c4f3-4aec-8a50-2b8387f40f94,4,5,False
-9fe791d1-c4f3-4aec-8a50-2b8387f40f94,3,2,False
-9fe791d1-c4f3-4aec-8a50-2b8387f40f94,2,5,False
-b6d0db5d-f122-4065-a386-69269b1eff59,4,3,False
+cb6fb47b-ac5e-45e2-887d-3635b4ef57da,2,3,False
